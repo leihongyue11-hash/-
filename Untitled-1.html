@@ -68,7 +68,7 @@
       <h2>联系方式</h2>
       <p>Email：78298779@qq.com</p>
       <p>GitHub：https://leihongyue11-hash.github.io/yimishuodiannao1/</p>
-      <p>头条号：https://www.toutiao.com/c/user/token/CibBJk2kj9fRH95PvddyTepBLaebtF2lMxlzKUmNoEUJWz8xsNQkARpJCjwAAAAAAAAAAAAAT75xIoY3J2MTQsA6HBKEnfJt_mqlcdwiyy84yLAmrfQeG6g2RT7O6lnr1RBb-kFD4A4QuqCCDhjDxYPqBCIBA-IR0iU=/?source=mine_profile&log_from=a78621e7881748_1763823845984</p>
+      <p>头条号：壹米说电脑</p>
     </div>
 
   </div>
