@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>壹米说电脑 · 敲木鱼积功德</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <!-- 微信分享优化 -->
+  <meta property="og:title" content="壹米说电脑 · 敲木鱼修电脑" />
+  <meta property="og:description" content="点一下木鱼，给电脑积功德，卡顿少一点，蓝屏走远点。" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(180deg, #0b1020, #020409);
+      font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: #fff;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 420px;
+      min-height: 100vh;
+      padding: 20px 16px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .header {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .header h1 {
+      font-size: 22px;
+      margin: 0 0 6px;
+      letter-spacing: 1px;
+    }
+
+    .header p {
+      font-size: 13px;
+      opacity: 0.8;
+    }
+
+    .muyu-wrap {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .muyu {
+      width: 260px;
+      height: 210px;
+      background: linear-gradient(145deg, #9b5e2e, #6e3f1c);
+      border-radius: 140px 140px 90px 90px;
+      position: relative;
+      box-shadow: inset -10px -10px 20px rgba(0, 0, 0, 0.4),
+        inset 10px 10px 20px rgba(255, 255, 255, 0.1),
+        0 20px 40px rgba(0, 0, 0, 0.8);
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.05s ease;
+    }
+
+    .muyu:active {
+      transform: scale(0.95);
+    }
+
+    .muyu::before {
+      content: "";
+      position: absolute;
+      top: 45px;
+      left: 45px;
+      right: 45px;
+      bottom: 65px;
+      border-radius: 80px;
+      background: linear-gradient(145deg, #7a3f1c, #a96a3a);
+      box-shadow: inset 0 8px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .counter {
+      text-align: center;
+      font-size: 18px;
+      margin-top: 10px;
+      letter-spacing: 1px;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    button {
+      flex: 1;
+      padding: 10px 0;
+      border-radius: 10px;
+      border: none;
+      background: #2c87ff;
+      color: #fff;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    button:active {
+      opacity: 0.8;
+    }
+
+    .footer {
+      margin-top: 20px;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 14px;
+      padding: 14px 12px;
+      text-align: center;
+    }
+
+    .footer h2 {
+      font-size: 15px;
+      margin: 0 0 6px;
+      color: #ffd36a;
+    }
+
+    .footer p {
+      font-size: 12px;
+      line-height: 1.6;
+      opacity: 0.9;
+    }
+
+    .follow-btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 8px 20px;
+      background: linear-gradient(135deg, #ff8c2b, #ffb347);
+      border-radius: 20px;
+      font-size: 13px;
+      color: #000;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .float {
+      position: absolute;
+      color: #ffd36a;
+      font-size: 20px;
+      pointer-events: none;
+      animation: floatUp 0.8s ease forwards;
+    }
+
+    @keyframes floatUp {
+      from {
+        transform: translate(-50%, -50%);
+        opacity: 1;
+      }
+      to {
+        transform: translate(-50%, -120%);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="header">
+      <h1>敲木鱼 · 修电脑积功德</h1>
+      <p>点一下，愿蓝屏少一点，卡顿远一点</p>
+    </div>
+
+    <div class="muyu-wrap">
+      <div class="muyu" id="muyu"></div>
+    </div>
+
+    <div class="counter">今日功德：<span id="count">0</span></div>
+
+    <div class="controls" id="controls">
+      <button id="resetBtn">清零</button>
+      <button id="soundBtn">关闭声音</button>
+    </div>
+
+    <div class="footer">
+      <h2>壹米说电脑</h2>
+      <p>
+        每天分享真实维修案例 · 装机避坑 · 系统优化实战<br />
+        让普通人也能看懂电脑
+      </p>
+      <a class="follow-btn" href="https://mp.weixin.qq.com/s/2psSXQ0YqIIt-IVYZ_q6MA">关注公众号</a>
+    </div>
+  </div>
+
+  <script>
+    const muyu = document.getElementById("muyu");
+    const countEl = document.getElementById("count");
+    const resetBtn = document.getElementById("resetBtn");
+    const soundBtn = document.getElementById("soundBtn");
+    const controls = document.getElementById("controls");
+
+    let count = parseInt(localStorage.getItem("yimi_muyu_count") || "0", 10);
+    let soundEnabled = true;
+
+    countEl.textContent = count;
+
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+    function unlockAudio() {
+      if (audioCtx.state !== "running") {
+        audioCtx.resume();
+      }
+      document.removeEventListener("touchstart", unlockAudio);
+      document.removeEventListener("click", unlockAudio);
+    }
+
+    document.addEventListener("touchstart", unlockAudio, { once: true });
+    document.addEventListener("click", unlockAudio, { once: true });
+
+    function floatPlus() {
+      const f = document.createElement("div");
+      f.className = "float";
+      f.textContent = "+1";
+      f.style.left = "50%";
+      f.style.top = "50%";
+      muyu.appendChild(f);
+
+      setTimeout(() => {
+        f.remove();
+      }, 800);
+    }
+
+    // 真实木鱼声
+    function playMuyuSound() {
+      if (!soundEnabled) return;
+
+      const now = audioCtx.currentTime;
+
+      const bufferSize = audioCtx.sampleRate * 0.02;
+      const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+      const data = buffer.getChannelData(0);
+
+      for (let i = 0; i < bufferSize; i++) {
+        const decay = Math.pow(1 - i / bufferSize, 4);
+        data[i] = (Math.random() * 2 - 1) * decay;
+      }
+
+      const noise = audioCtx.createBufferSource();
+      noise.buffer = buffer;
+
+      const noiseFilter = audioCtx.createBiquadFilter();
+      noiseFilter.type = "highpass";
+      noiseFilter.frequency.setValueAtTime(1200, now);
+
+      const osc1 = audioCtx.createOscillator();
+      osc1.type = "triangle";
+      osc1.frequency.setValueAtTime(420, now);
+
+      const osc2 = audioCtx.createOscillator();
+      osc2.type = "triangle";
+      osc2.frequency.setValueAtTime(630, now);
+
+      const gain = audioCtx.createGain();
+      gain.gain.setValueAtTime(0.7, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+
+      const bodyFilter = audioCtx.createBiquadFilter();
+      bodyFilter.type = "bandpass";
+      bodyFilter.frequency.setValueAtTime(700, now);
+      bodyFilter.Q.value = 1.5;
+
+      noise.connect(noiseFilter);
+      noiseFilter.connect(bodyFilter);
+
+      osc1.connect(bodyFilter);
+      osc2.connect(bodyFilter);
+
+      bodyFilter.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      noise.start(now);
+      noise.stop(now + 0.03);
+
+      osc1.start(now);
+      osc2.start(now);
+      osc1.stop(now + 0.3);
+      osc2.stop(now + 0.3);
+    }
+
+    // 颂钵声
+    function playBowlSound() {
+      if (!soundEnabled) return;
+
+      const now = audioCtx.currentTime;
+
+      const masterGain = audioCtx.createGain();
+      masterGain.gain.setValueAtTime(0.001, now);
+      masterGain.gain.exponentialRampToValueAtTime(0.4, now + 0.3);
+      masterGain.gain.exponentialRampToValueAtTime(0.001, now + 4);
+
+      const freqs = [220, 440, 660, 880];
+      freqs.forEach((f, i) => {
+        const osc = audioCtx.createOscillator();
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(f, now);
+
+        const g = audioCtx.createGain();
+        g.gain.setValueAtTime(0.15 / (i + 1), now);
+
+        osc.connect(g);
+        g.connect(masterGain);
+
+        osc.start(now);
+        osc.stop(now + 4.2);
+      });
+
+      const filter = audioCtx.createBiquadFilter();
+      filter.type = "lowpass";
+      filter.frequency.setValueAtTime(1800, now);
+
+      masterGain.connect(filter);
+      filter.connect(audioCtx.destination);
+    }
+
+    function knock() {
+      if (audioCtx.state === "suspended") {
+        audioCtx.resume();
+      }
+
+      count++;
+      countEl.textContent = count;
+      localStorage.setItem("yimi_muyu_count", count.toString());
+
+      playMuyuSound();
+      floatPlus();
+    }
+
+    muyu.addEventListener("click", () => {
+      unlockAudio();
+      knock();
+    });
+
+    resetBtn.addEventListener("click", () => {
+      count = 0;
+      countEl.textContent = "0";
+      localStorage.setItem("yimi_muyu_count", "0");
+    });
+
+    soundBtn.addEventListener("click", () => {
+      soundEnabled = !soundEnabled;
+      soundBtn.textContent = soundEnabled ? "关闭声音" : "开启声音";
+    });
+
+    // 创建颂钵按钮
+    const bowlBtn = document.createElement("button");
+    bowlBtn.textContent = "敲颂钵";
+    controls.appendChild(bowlBtn);
+
+    bowlBtn.addEventListener("click", () => {
+      if (audioCtx.state === "suspended") {
+        audioCtx.resume();
+      }
+      playBowlSound();
+    });
+  </script>
+</body>
+</html>
